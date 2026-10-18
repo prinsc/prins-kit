@@ -1,0 +1,43 @@
+{
+	"name": "@prinsc/prins-kit",
+	"version": "0.1.0",
+	"description": "Kit partagé des outils kltk (Blondel, Gen-Schema…) : jetons « studio », polices, infobulle, sélecteur d'outils, relais serveur vers l'admin studio.",
+	"type": "module",
+	"license": "MIT",
+	"author": "Prins",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/prinsc/prins-kit.git"
+	},
+	"keywords": ["svelte", "sveltekit", "kltk"],
+	"files": [
+		"src",
+		"!src/**/*.test.js"
+	],
+	"svelte": "./src/index.js",
+	"exports": {
+		".": {
+			"svelte": "./src/index.js",
+			"default": "./src/index.js"
+		},
+		"./tools": "./src/tools.js",
+		"./server": "./src/server/index.js",
+		"./auth": "./src/auth/index.js",
+		"./studio.css": "./src/studio.css",
+		"./fonts.css": "./src/fonts.css",
+		"./package.json": "./package.json"
+	},
+	"sideEffects": [
+		"**/*.css"
+	],
+	"scripts": {
+		"test": "node --test \"src/**/*.test.js\""
+	},
+	"peerDependencies": {
+		"lucide-svelte": ">=0.400.0",
+		"svelte": "^5.0.0"
+	},
+	"engines": {
+		"node": ">=22"
+	}
+}

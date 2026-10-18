@@ -1,0 +1,39 @@
+# Publication npm à chaque tag `v*` (ex. `git tag v0.1.1 && git push --tags`).
+#
+# « Trusted publishing » npm (OIDC) : aucun token à stocker. À configurer UNE fois sur
+# npmjs.com → paquet @prinsc/prins-kit → Settings → Trusted publisher → GitHub Actions,
+# dépôt `prinsc/prins-kit`, workflow `publish.yml`. Tant que ce n'est pas fait, ce job
+# échoue (sans conséquence) et on publie à la main : `npm publish --access public`.
+name: Publish
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+      # le trusted publishing exige npm >= 11.5.1
+      - run: npm install -g npm@latest
+      - run: npm test
+      - name: Vérifier que le tag correspond à la version
+        run: test "v$(node -p "require('./package.json').version")" = "$GITHUB_REF_NAME"
+      - name: Publier (sauf si cette version existe déjà)
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "$NAME@$VERSION déjà publié - rien à faire"
+          else
+            npm publish --access public
+          fi

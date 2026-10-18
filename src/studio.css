@@ -1,0 +1,87 @@
+/*
+ * Jetons « studio » communs aux outils kltk (Blondel, Gen-Schema…).
+ *
+ * Langage calé sur le studio Supabase : sombre par défaut, accent vert, bouton
+ * principal vert foncé bordé de vert (jamais un aplat d'accent vif).
+ *
+ * Posés sur `.kit-root` (la racine de chaque outil), clair via
+ * `data-theme="light"`. Chaque outil garde ses anciens noms de jetons en ALIAS
+ * (`--panel: var(--kit-surface)`) : ses composants ne sont pas réécrits.
+ * Les composants du kit, eux, ne lisent QUE des `--kit-*`.
+ */
+
+.kit-root {
+	--kit-bg: #121212; /* fond de travail (toile, plan) */
+	--kit-surface: #1c1c1c; /* barres, colonnes, cartes */
+	--kit-surface-2: #232323; /* champs, survols */
+	--kit-surface-3: #2c2c2c; /* élément actif d'un segment */
+	--kit-border: #2b2b2b;
+	--kit-border-2: #383838;
+	--kit-ink: #ededed;
+	--kit-ink-2: #c7c7c7;
+	--kit-muted: #8f8f8f;
+	--kit-faint: #6a6a6a;
+	--kit-accent: #3ecf8e;
+	--kit-accent-soft: rgba(62, 207, 142, 0.09);
+	--kit-accent-line: rgba(62, 207, 142, 0.38);
+	--kit-primary: #006239;
+	--kit-primary-hover: #00744a;
+	--kit-primary-line: rgba(62, 207, 142, 0.45);
+	--kit-primary-ink: #f5fff9;
+	--kit-ok: #3ecf8e;
+	--kit-warn: #f1a10d;
+	--kit-err: #f2555a;
+	--kit-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.35);
+	--kit-radius: 6px;
+	--kit-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--kit-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+.kit-root[data-theme='light'] {
+	--kit-bg: #f8f8f8;
+	--kit-surface: #ffffff;
+	--kit-surface-2: #f7f7f7;
+	--kit-surface-3: #ededed;
+	--kit-border: #e8e8e8;
+	--kit-border-2: #dadada;
+	--kit-ink: #171717;
+	--kit-ink-2: #3d3d3d;
+	--kit-muted: #6e6e6e;
+	--kit-faint: #9b9b9b;
+	--kit-accent: #16a06a;
+	--kit-accent-soft: rgba(22, 160, 106, 0.07);
+	--kit-accent-line: rgba(22, 160, 106, 0.4);
+	--kit-primary: #16a06a;
+	--kit-primary-hover: #12895a;
+	--kit-primary-line: #12895a;
+	--kit-primary-ink: #ffffff;
+	--kit-ok: #16a06a;
+	--kit-warn: #c27c0e;
+	--kit-err: #d8373c;
+	--kit-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 12px 32px rgba(0, 0, 0, 0.09);
+}
+
+/* Infobulle de l'action `use:tooltip` (src/tooltip.js), accrochée dans `.kit-root`
+   pour hériter des jetons du thème courant. */
+.kit-tooltip {
+	position: fixed;
+	z-index: 80;
+	pointer-events: none;
+	transform: translate(-50%, -100%);
+	/* largeur propre au texte : sans `max-content`, une bulle posée près du bord droit
+	   (left ≈ largeur de l'écran) se repliait mot par mot dans la place restante */
+	width: max-content;
+	max-width: 260px;
+	padding: 5px 8px;
+	border: 1px solid var(--kit-border-2);
+	border-radius: 6px;
+	background: var(--kit-surface);
+	box-shadow: var(--kit-shadow);
+	color: var(--kit-ink);
+	font: 500 11.5px/1.35 var(--kit-sans);
+	opacity: 0;
+	transition: opacity 0.12s ease;
+}
+.kit-tooltip.below {
+	transform: translate(-50%, 0);
+}
