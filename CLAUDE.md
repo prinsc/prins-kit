@@ -19,7 +19,7 @@ Design d'ensemble : `eleazar-portfolio-v2/docs/superpowers/specs/2026-10-18-outi
 | `tooltip` (alias `tip`) | action `use:tooltip={'texte'}` |
 | `SupportCard` + `BMC_URL` | encart Buy Me a Coffee, assets BMC dans `src/assets/` |
 | `ToolSwitcher` + `TOOLS`, `toolHref`, `pick`, `toolById` | menu « Outils kltk », registre des outils |
-| `StairsIcon` | marque de Blondel |
+| `BlondelLogo` | logo de Blondel (en couleurs, faces sombres en `currentColor`) |
 | `@prinsc/prins-kit/server` | `createLeadHandler`, `createFeedbackHandler` (relais vers admin.kltk.be) |
 | `@prinsc/prins-kit/auth` | contrat `Viewer`, `viewerHandle` (`locals.viewer = null`), `loginUrl` |
 
@@ -36,9 +36,11 @@ Règles :
   Ne pas introduire de TypeScript ni d'étape de build sans raison.
 - `svelte` et `lucide-svelte` en `peerDependencies`. Pas d'icône Zap/éclair.
 - Ajouter un outil = une entrée dans `TOOLS` (`id`, `url`, `icon`, `langs`, `name`, `tagline`)
-  + une icône dans `ToolSwitcher` si ce n'est ni `stairs` ni `network`.
+  + une icône dans `ToolSwitcher` si ce n'est ni `stairs` (logo de Blondel) ni `network`.
 
 ## Changer quelque chose dans le kit
+
+Depuis n'importe quel outil, modifier le kit est autorisé sans demander (utilisateur, 2026-10-19).
 
 1. Modifier ici, `npm test`.
 2. `npm version patch` (correctif) ou `minor` (nouveauté / API changée : en `0.x` une mineure

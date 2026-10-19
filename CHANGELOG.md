@@ -4,6 +4,18 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions [sem
 Tant qu'on est en `0.x`, une version MINEURE (`0.2.0`) peut casser l'API : les outils
 dépendent de `^0.1.0`, qui n'accepte que les correctifs `0.1.x`.
 
+## [0.2.0] - 2026-10-19
+
+### Ajouté
+- `BlondelLogo` : le nouveau logo de Blondel (marches en cubes isométriques), en ligne, faces
+  sombres en `currentColor`. Le menu des outils l'affiche pour Blondel.
+
+### Retiré
+- `StairsIcon` (ancien tracé en escalier), remplacé par `BlondelLogo`. Aucun outil ne l'importait.
+
+### Modifié
+- `peerDependencies.svelte` : `^5.20.0` (`$props.id`).
+
 ## [0.1.0] - 2026-10-18
 
 Première version, extraite des outils du portfolio (`/outils/calcul-escalier`, `/outils/gen-schema`).

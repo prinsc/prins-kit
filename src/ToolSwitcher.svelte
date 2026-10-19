@@ -3,7 +3,7 @@
 	// de chacun. Menu déroulant, mais les liens restent dans le DOM (crawlables).
 	// Données : registre `TOOLS` (src/tools.js). L'outil courant est marqué, pas masqué.
 	import { LayoutGrid, Network, Check } from 'lucide-svelte';
-	import StairsIcon from './StairsIcon.svelte';
+	import BlondelLogo from './BlondelLogo.svelte';
 	import { TOOLS, SWITCHER_TEXT, pick, toolHref } from './tools.js';
 
 	/** `current` = id du registre de l'outil qui affiche le menu. */
@@ -41,8 +41,8 @@
 				class:cur={t.id === current}
 				aria-current={t.id === current ? 'page' : undefined}
 			>
-				<span class="ico">
-					{#if t.icon === 'stairs'}<StairsIcon />{:else}<Network size={14} />{/if}
+				<span class="ico" class:logo={t.icon === 'stairs'}>
+					{#if t.icon === 'stairs'}<BlondelLogo size={18} />{:else}<Network size={14} />{/if}
 				</span>
 				<span class="txt">
 					<span class="nm">{pick(t.name, lang)}</span>
@@ -124,6 +124,10 @@
 		background: var(--kit-accent-soft);
 		border: 1px solid var(--kit-accent-line);
 		color: var(--kit-accent);
+	}
+	/* logo en couleurs : ses faces sombres prennent l'encre (le vert de la tuile les noierait) */
+	.ico.logo {
+		color: var(--kit-ink);
 	}
 	.txt {
 		display: flex;
