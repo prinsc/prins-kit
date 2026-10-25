@@ -4,6 +4,24 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions [sem
 Tant qu'on est en `0.x`, une version MINEURE (`0.2.0`) peut casser l'API : les outils
 dépendent de `^0.1.0`, qui n'accepte que les correctifs `0.1.x`.
 
+## [0.3.0] - 2026-10-24
+
+### Ajouté
+- `@prinsc/prins-kit/auth` branché (Blondel en premier) : le studio (`studio.kltk.be`) porte les
+  comptes, l'outil n'a que sa session, dans un cookie httpOnly sur son propre domaine.
+  - `createViewerHandle({ createServerClient, url, key, plan })` : `locals.supabase` (droits de la
+    personne connectée) + `locals.viewer` (`{ id, email, plan }`). `createServerClient` est passé
+    par l'outil : le kit n'a toujours aucune dépendance Supabase.
+  - `createSsoHandler()` (`GET /auth/sso`) : échange le jeton à usage unique du studio contre une
+    session de l'outil.
+  - `createLogoutHandler()` (`POST /auth/logout`).
+  - `studioUrl(path, { org })`, `safePath(next)`, `STUDIO_URL`.
+
+### Modifié
+- `loginUrl(next, { signup })` vise `https://studio.kltk.be/sso?next=…` (avant : la page de
+  connexion d'admin.kltk.be, jamais branchée). `viewerHandle` (viewer nul) reste pour les outils
+  sans compte.
+
 ## [0.2.0] - 2026-10-19
 
 ### Ajouté

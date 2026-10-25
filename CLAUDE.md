@@ -21,7 +21,7 @@ Design d'ensemble : `eleazar-portfolio-v2/docs/superpowers/specs/2026-10-18-outi
 | `ToolSwitcher` + `TOOLS`, `toolHref`, `pick`, `toolById` | menu « Outils kltk », registre des outils |
 | `BlondelLogo` | logo de Blondel (en couleurs, faces sombres en `currentColor`) |
 | `@prinsc/prins-kit/server` | `createLeadHandler`, `createFeedbackHandler` (relais vers admin.kltk.be) |
-| `@prinsc/prins-kit/auth` | contrat `Viewer`, `viewerHandle` (`locals.viewer = null`), `loginUrl` |
+| `@prinsc/prins-kit/auth` | comptes par le studio : `createViewerHandle` (`locals.supabase` + `locals.viewer`), `createSsoHandler` (`/auth/sso`), `createLogoutHandler`, `loginUrl` (→ studio `/sso`), `studioUrl` ; `viewerHandle` (viewer nul) pour un outil sans compte. Voir l'en-tête de `src/auth/index.js` |
 
 Règles :
 - **Pas d'i18n propre.** Tout texte visible arrive en prop. Seules exceptions : noms/taglines
