@@ -4,6 +4,24 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions [sem
 Tant qu'on est en `0.x`, une version MINEURE (`0.2.0`) peut casser l'API : les outils
 dépendent de `^0.1.0`, qui n'accepte que les correctifs `0.1.x`.
 
+## [0.4.0] - 2026-10-26
+
+### Sécurité
+- **Injection de session sur `/auth/sso` corrigée.** Sans lien entre le navigateur qui lance la
+  connexion et celui qui revient, n'importe qui pouvait demander au studio un jeton pour SON
+  compte, copier l'adresse de retour et la faire ouvrir à quelqu'un d'autre : la victime était
+  connectée au compte de l'attaquant, et ses projets s'y enregistraient.
+  - `createLoginHandler({ studio })` (`GET /auth/login`, **nouvelle route obligatoire**) : pose un
+    `state` aléatoire dans un cookie httpOnly `__Host-kltk_sso_state` (1 h) et le glisse dans le
+    `next` envoyé au studio.
+  - `createSsoHandler()` n'échange plus le jeton que si le `state` revenu est celui du cookie
+    (comparaison à temps constant). Le cookie est consommé à chaque retour.
+
+### Modifié (cassant)
+- `loginUrl(next, { signup })` rend `/auth/login?next=<chemin>` (route de l'outil) au lieu de
+  l'adresse du studio. L'option `studio` passe à `createLoginHandler`. Un lien
+  `studio/sso?next=…` construit à la main n'a pas de `state` : son retour est refusé.
+
 ## [0.3.0] - 2026-10-24
 
 ### Ajouté

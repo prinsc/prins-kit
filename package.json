@@ -1,6 +1,6 @@
 {
 	"name": "@prinsc/prins-kit",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"description": "Kit partagé des outils kltk (Blondel, Gen-Schema…) : jetons « studio », polices, infobulle, sélecteur d'outils, relais serveur vers l'admin studio.",
 	"type": "module",
 	"license": "MIT",
