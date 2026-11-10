@@ -1,38 +1,40 @@
 <script>
-	// Encart de soutien Buy Me a Coffee, commun aux outils. Seule touche de jaune : c'est la
-	// couleur de la marque BMC, elle doit se reconnaître d'un coup d'œil.
-	// Assets officiels BMC embarqués dans le kit (src/assets) : Vite les émet hachés.
-	// Aucun texte en dur : chaque outil passe les siens (le kit n'a pas d'i18n).
+	// Encart de soutien Ko-fi, commun aux outils. Seule touche de bleu Ko-fi : c'est la couleur
+	// des boutons officiels, elle doit se reconnaître d'un coup d'œil.
+	// Assets officiels Ko-fi embarqués dans le kit (src/assets, AVIF tels que publiés par
+	// more.ko-fi.com/brand-assets) : Vite les émet hachés.
+	// Aucun texte en dur : chaque outil passe les siens (le kit n'a pas d'i18n). `alt` doit dire
+	// ce que l'image de bouton écrit (« Support me on Ko-fi »), traduit.
 	// Le texte de l'outil dit que les équivalents sont payants SANS nommer de concurrent.
-	import logo from './assets/bmc-logo.svg';
-	import button from './assets/bmc-button.svg';
-	import { BMC_URL } from './support.js';
+	import button from './assets/kofi-button.avif';
+	import KofiCup from './KofiCup.svelte';
+	import { KOFI_URL, KOFI_BLUE } from './support.js';
 
-	let { title, text, alt, url = BMC_URL, id = 'kit-bmc-h' } = $props();
+	let { title, text, alt, url = KOFI_URL, id = 'kit-kofi-h' } = $props();
 </script>
 
-<section class="bmc" aria-labelledby={id}>
+<section class="kofi" aria-labelledby={id} style:--kofi-blue={KOFI_BLUE}>
 	<a class="cup" href={url} target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-		<img src={logo} alt="" width="34" height="49" />
+		<KofiCup size={38} />
 	</a>
 	<div class="body">
 		<h3 {id}>{title}</h3>
 		<p>{text}</p>
 		<a class="btn" href={url} target="_blank" rel="noopener">
-			<img src={button} {alt} width="178" height="50" />
+			<img src={button} {alt} width="218" height="44" />
 		</a>
 	</div>
 </section>
 
 <style>
-	.bmc {
+	.kofi {
 		display: flex;
 		gap: 18px;
 		padding: 22px;
 		border: 1px solid var(--kit-border);
 		border-radius: 10px;
 		background:
-			radial-gradient(120% 140% at 0% 0%, rgba(255, 221, 0, 0.07), transparent 55%),
+			radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--kofi-blue) 9%, transparent), transparent 55%),
 			var(--kit-surface);
 	}
 	.cup {
@@ -42,17 +44,13 @@
 		width: 64px;
 		height: 64px;
 		border-radius: 14px;
-		background: #ffdd00;
+		background: var(--kofi-blue);
 		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
 		transform: rotate(-4deg);
 		transition: transform 0.2s ease;
 	}
-	.bmc:hover .cup {
+	.kofi:hover .cup {
 		transform: rotate(0deg);
-	}
-	.cup img {
-		width: 30px;
-		height: auto;
 	}
 	.body {
 		display: flex;
@@ -97,7 +95,7 @@
 		}
 	}
 	@media (max-width: 480px) {
-		.bmc {
+		.kofi {
 			flex-direction: column;
 			gap: 14px;
 			padding: 18px;

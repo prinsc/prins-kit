@@ -25,7 +25,7 @@ npm i @prinsc/prins-kit
 
 <ToolSwitcher current="blondel" lang="fr" />
 <button use:tooltip={'Thème'}>…</button>
-<SupportCard title="…" text="…" alt="Buy me a coffee" />
+<SupportCard title="…" text="…" alt="Support me on Ko-fi" />
 ```
 
 ```js

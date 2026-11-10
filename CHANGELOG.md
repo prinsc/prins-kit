@@ -4,6 +4,21 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions [sem
 Tant qu'on est en `0.x`, une version MINEURE (`0.2.0`) peut casser l'API : les outils
 dépendent de `^0.1.0`, qui n'accepte que les correctifs `0.1.x`.
 
+## [0.5.0] - 2026-11-10
+
+### Modifié (cassant)
+- **Buy Me a Coffee remplacé par Ko-fi** (`ko-fi.com/eleazar_k`). `BMC_URL` n'existe plus :
+  importer `KOFI_URL`. Assets BMC retirés de `src/assets/`, remplacés par les fichiers
+  officiels Ko-fi (`kofi-cup.avif`, `kofi-button.avif`, AVIF tels que publiés sur
+  more.ko-fi.com/brand-assets).
+- `SupportCard` : couleurs Ko-fi (bleu `#72a5f2` des boutons officiels), bouton
+  « Support me on Ko-fi ». Classe racine `.kofi`, `id` par défaut `kit-kofi-h`. Le `alt` passé
+  doit dire ce que l'image écrit (« Support me on Ko-fi », traduit).
+
+### Ajouté
+- `KofiCup` : la tasse officielle Ko-fi (`size`, `alt`), pour le bouton de soutien des barres
+  d'outils. `KOFI_BLUE` : le bleu des boutons officiels.
+
 ## [0.4.0] - 2026-10-26
 
 ### Sécurité

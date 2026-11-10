@@ -17,7 +17,8 @@ Design d'ensemble : `eleazar-portfolio-v2/docs/superpowers/specs/2026-10-18-outi
 | `@prinsc/prins-kit/studio.css` | jetons `--kit-*` sur `.kit-root`, clair via `data-theme="light"` ; styles `.kit-tooltip` |
 | `@prinsc/prins-kit/fonts.css` | Inter (variable) + IBM Plex Mono 400/500/700, fichiers dans `src/fonts/` |
 | `tooltip` (alias `tip`) | action `use:tooltip={'texte'}` |
-| `SupportCard` + `BMC_URL` | encart Buy Me a Coffee, assets BMC dans `src/assets/` |
+| `SupportCard` + `KOFI_URL`, `KOFI_BLUE` | encart Ko-fi (`ko-fi.com/eleazar_k`), assets officiels Ko-fi (AVIF) dans `src/assets/` |
+| `KofiCup` | tasse officielle Ko-fi (`size`, `alt`), pour le bouton de soutien des barres d'outils |
 | `ToolSwitcher` + `TOOLS`, `toolHref`, `pick`, `toolById` | menu « Outils kltk », registre des outils |
 | `BlondelLogo` | logo de Blondel (en couleurs, faces sombres en `currentColor`) |
 | `@prinsc/prins-kit/server` | `createLeadHandler`, `createFeedbackHandler` (relais vers admin.kltk.be) |
