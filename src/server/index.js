@@ -34,7 +34,9 @@ const json = (payload, status) =>
 
 /**
  * Inscription (newsletter / « prévenez-moi ») → POST {ADMIN_API}/newsletter
- *   body amont : { email, name, source, honeypot: '' }
+ *   body amont : { email, name, source, lang?, honeypot: '' }
+ *   `lang` = langue de la page (`fr`, `en`, `pt-BR`…) : le studio envoie les campagnes
+ *   traduites dans cette langue. Facultatif ; absent = langue par défaut du tenant.
  *   succès : { ok: true } (un email déjà inscrit renvoie aussi 200) · 429 : 5 / IP / minute
  *
  * @param {{ apiKey: () => string | undefined, url?: string, tag?: string }} opts
@@ -79,6 +81,8 @@ export function createLeadHandler({ apiKey, url = `${ADMIN_API}/newsletter`, tag
 					email,
 					name: clean(body.name, 120),
 					source: clean(body.source, 80) || 'site-web',
+					// `undefined` si vide : JSON.stringify l'omet, l'amont garde la langue connue.
+					lang: clean(body.lang, 10) || undefined,
 					// Notre leurre a déjà filtré plus haut : toujours vide, comme l'exige l'amont.
 					honeypot: ''
 				})

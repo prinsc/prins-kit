@@ -4,6 +4,12 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions [sem
 Tant qu'on est en `0.x`, une version MINEURE (`0.2.0`) peut casser l'API : les outils
 dépendent de `^0.1.0`, qui n'accepte que les correctifs `0.1.x`.
 
+## [Non publié]
+
+### Ajouté
+- **SlatShape** dans le registre `TOOLS` (`slat-shape.kltk.be`, domaine provisoire ; langues
+  fr, en, nl, es, ru) et son icône (`slats`) dans `ToolSwitcher`. Type `Lang` : `ru` ajouté.
+
 ## [0.5.0] - 2026-11-10
 
 ### Modifié (cassant)

@@ -7,7 +7,7 @@
 // Les noms sont des noms propres ou des libellés courts, d'où leur place dans le kit, qui
 // n'a pas d'autre texte traduit.
 
-/** @typedef {'fr'|'nl'|'en'|'de'|'es'|'it'|'pt'} Lang */
+/** @typedef {'fr'|'nl'|'en'|'de'|'es'|'it'|'pt'|'ru'} Lang */
 
 export const TOOLS = [
 	{
@@ -24,6 +24,22 @@ export const TOOLS = [
 			es: 'Cálculo de escaleras',
 			it: 'Calcolo scale',
 			pt: 'Cálculo de escadas'
+		}
+	},
+	{
+		id: 'slatshape',
+		url: 'https://slat-shape.kltk.be',
+		icon: 'slats',
+		langs: ['fr', 'en', 'nl', 'es', 'ru'],
+		name: 'SlatShape',
+		tagline: {
+			fr: 'Murs paramétriques en lamelles',
+			nl: 'Parametrische lamellenwanden',
+			en: 'Parametric slat walls',
+			de: 'Parametrische Lamellenwände',
+			es: 'Paredes paramétricas de lamas',
+			it: 'Pareti parametriche a lamelle',
+			pt: 'Paredes paramétricas de ripas'
 		}
 	},
 	{

@@ -2,7 +2,7 @@
 	// Sélecteur « Outils kltk » : le lien visible entre les outils, posé dans la barre du haut
 	// de chacun. Menu déroulant, mais les liens restent dans le DOM (crawlables).
 	// Données : registre `TOOLS` (src/tools.js). L'outil courant est marqué, pas masqué.
-	import { LayoutGrid, Network, Check } from 'lucide-svelte';
+	import { LayoutGrid, Network, Columns3, Check } from 'lucide-svelte';
 	import BlondelLogo from './BlondelLogo.svelte';
 	import { TOOLS, SWITCHER_TEXT, pick, toolHref } from './tools.js';
 
@@ -42,7 +42,7 @@
 				aria-current={t.id === current ? 'page' : undefined}
 			>
 				<span class="ico" class:logo={t.icon === 'stairs'}>
-					{#if t.icon === 'stairs'}<BlondelLogo size={18} />{:else}<Network size={14} />{/if}
+					{#if t.icon === 'stairs'}<BlondelLogo size={18} />{:else if t.icon === 'slats'}<Columns3 size={14} />{:else}<Network size={14} />{/if}
 				</span>
 				<span class="txt">
 					<span class="nm">{pick(t.name, lang)}</span>

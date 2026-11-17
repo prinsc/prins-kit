@@ -42,6 +42,15 @@ test('lead : source par défaut « site-web »', async () => {
 	assert.equal(up.calls[0].body.source, 'site-web');
 });
 
+test('lead : relaie la langue de la page, l’omet si absente', async () => {
+	const up = upstream();
+	const h = createLeadHandler({ apiKey: key });
+	await h({ request: req({ email: 'a@b.be', lang: 'pt-BR' }), fetch: up.fetch });
+	assert.equal(up.calls[0].body.lang, 'pt-BR');
+	await h({ request: req({ email: 'a@b.be' }), fetch: up.fetch });
+	assert.ok(!('lang' in up.calls[1].body), 'pas de lang vide : l’amont garderait sinon une langue effacée');
+});
+
 test('lead : leurre rempli → 200 sans appel amont', async () => {
 	const up = upstream();
 	const res = await createLeadHandler({ apiKey: key })({
