@@ -4,7 +4,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions [sem
 Tant qu'on est en `0.x`, une version MINEURE (`0.2.0`) peut casser l'API : les outils
 dépendent de `^0.1.0`, qui n'accepte que les correctifs `0.1.x`.
 
-## [Non publié] - prévu 0.6.0
+## [0.6.0] - 2026-11-25
 
 ### Ajouté
 - **SlatShape** dans le registre `TOOLS` (`slat-shape.kltk.be`, domaine provisoire ; langues
