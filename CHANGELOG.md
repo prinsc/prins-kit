@@ -4,11 +4,32 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions [sem
 Tant qu'on est en `0.x`, une version MINEURE (`0.2.0`) peut casser l'API : les outils
 dépendent de `^0.1.0`, qui n'accepte que les correctifs `0.1.x`.
 
-## [Non publié]
+## [Non publié] - prévu 0.6.0
 
 ### Ajouté
 - **SlatShape** dans le registre `TOOLS` (`slat-shape.kltk.be`, domaine provisoire ; langues
   fr, en, nl, es, ru) et son icône (`slats`) dans `ToolSwitcher`. Type `Lang` : `ru` ajouté.
+- **Fabrication numérique `@prinsc/prins-kit/cnc`** (2026-11-24) : le code CNC de SlatShape devient
+  celui du kit, pour Blondel et les suivants. JS pur, testé (`src/cnc/cnc.test.js`). Sous-chemins
+  `/cnc/geometry`, `/cnc/offset`, `/cnc/nesting`, `/cnc/dxf`, `/cnc/gcode`, `/cnc/cam`,
+  `/cnc/gcode-parse` (un outil qui garde le générateur côté serveur importe les sous-chemins).
+  - imbrication : skyline + comblement, groupes par matière / épaisseur, stock de plaques et chutes
+    réutilisables (portés par la session SlatShape) ; nouveau par pièce : `turn: false` (pas de
+    quart de tour : fil du bois) et `flip: false` (pas de miroir : face finie) ;
+  - DXF R12 / SVG : couches `POCHE_<prof>` (poches) et `PERCAGE_<prof>` (perçages borgnes),
+    `partEntities` ; G-code Mach3 : poches vidées en anneaux concentriques (`pocketRings`,
+    `cam.stepover`), perçages borgnes, en-tête `app` (`(Blondel - …)`, `(SlatShape - …)`).
+- **Briques d'interface** (2026-11-24, origine SlatShape) : `Seg` (`wrap`), `Switch`, `Check`,
+  `NumField` (format / parse en props, ↺ valeur par défaut, plage conseillée, snippets `help` et
+  `eye`, `texts`), `Help` (bulle « ? », `title` / `body` / `aria`), `Split` (deux panneaux
+  redimensionnables, `storageKey`, `labels`), `LoadBar`, `motion` / `motionMs` / `pop` / `veil`.
+  Jetons `--kit-*` seulement, aucun texte en dur hors des valeurs par défaut anglaises de `Split`.
+
+### Modifié
+- **Infobulle** (`tooltip` / `tip`) : celle de SlatShape, une bulle unique qui apparaît (échelle +
+  fondu) puis GLISSE d'un bouton à l'autre. Même usage. Styles injectés (`.kit-tip`) ; les styles
+  `.kit-tooltip` de `studio.css` sont retirés. Respecte `motion.enabled` et « réduire les
+  animations ».
 
 ## [0.5.0] - 2026-11-10
 

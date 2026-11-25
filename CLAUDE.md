@@ -7,6 +7,12 @@ son repo et sur son sous-domaine :
 |---|---|---|
 | Blondel (calcul d'escalier) | `../blondel` | `blondel.kltk.be` (Coolify) |
 | Gen-Schema (schémas électriques) | `../gen-schema` | `gen-schema.kltk.be` (Coolify) |
+| SlatShape (murs en lamelles, CNC) | `../slatshape` | `slat-shape.kltk.be` (provisoire) |
+
+**Source de vérité de l'UI** (demande du 2026-11-24 : « SlatShape est la version la plus aboutie,
+prins-kit doit en être la source principale ; mes outils sont très proches et les prochains le
+seront aussi ») : une brique d'interface ou un module de fabrication qui sert à deux outils vit ICI,
+jamais en copie dans les outils.
 
 Design d'ensemble : `eleazar-portfolio-v2/docs/superpowers/specs/2026-10-18-outils-repos-separes-design.md`.
 
@@ -16,7 +22,12 @@ Design d'ensemble : `eleazar-portfolio-v2/docs/superpowers/specs/2026-10-18-outi
 |---|---|
 | `@prinsc/prins-kit/studio.css` | jetons `--kit-*` sur `.kit-root`, clair via `data-theme="light"` ; styles `.kit-tooltip` |
 | `@prinsc/prins-kit/fonts.css` | Inter (variable) + IBM Plex Mono 400/500/700, fichiers dans `src/fonts/` |
-| `tooltip` (alias `tip`) | action `use:tooltip={'texte'}` |
+| `tooltip` (alias `tip`) | action `use:tooltip={'texte'}` : bulle unique qui glisse d'un bouton à l'autre (styles injectés, `.kit-tip`) |
+| `motion`, `motionMs`, `pop`, `veil` | micro-animations ; `motion.enabled` = préférence de l'outil, « réduire les animations » l'emporte |
+| `Seg`, `Switch`, `Check` | segments (`wrap`), interrupteur, case à cocher maison (jamais d'`<input type="checkbox">`) |
+| `NumField` | champ numérique gratté ; `format` / `parse` (unités de l'outil), `def` (↺), `min`/`max` = plage conseillée, `hardMin`/`hardMax`, `texts`, snippets `help` / `eye` |
+| `Help`, `Split`, `LoadBar` | bulle « ? » (`title`, `body`, `aria`), deux panneaux redimensionnables (`storageKey`, `labels`), barre de chargement |
+| `@prinsc/prins-kit/cnc` (+ `/cnc/geometry`, `/offset`, `/nesting`, `/dxf`, `/gcode`, `/cam`, `/gcode-parse`) | fabrication numérique (code de SlatShape) : imbrication (fil du bois `turn`, miroir `flip`, stock, chutes), DXF R12 / SVG (poches `POCHE_<p>`, perçages borgnes), G-code Mach3 (poches, perçages borgnes), relecture. JS pur |
 | `SupportCard` + `KOFI_URL`, `KOFI_BLUE` | encart Ko-fi (`ko-fi.com/eleazar_k`), assets officiels Ko-fi (AVIF) dans `src/assets/` |
 | `KofiCup` | tasse officielle Ko-fi (`size`, `alt`), pour le bouton de soutien des barres d'outils |
 | `ToolSwitcher` + `TOOLS`, `toolHref`, `pick`, `toolById` | menu « Outils kltk », registre des outils |
@@ -30,6 +41,7 @@ Règles :
 - **Les composants ne lisent QUE des `--kit-*`.** Les outils aliasent leurs anciens noms
   (`--panel: var(--kit-surface)`), jamais l'inverse.
 - **Le kit ne lit jamais l'environnement.** Les handlers serveur reçoivent `apiKey` en fonction.
+- `src/cnc/` est du **JS pur** (aucun DOM, aucun Svelte), comme `src/server/` et `src/auth/`.
 - `src/server/` et `src/auth/` sont du **Node pur** (aucun import SvelteKit, aucun `.svelte`) :
   testés par `node --test`, importables depuis un `+server.js` sans tirer de composant.
 - **Paquet source, sans build** : on publie `src/` tel quel (JS + `.svelte` + CSS). Le champ
